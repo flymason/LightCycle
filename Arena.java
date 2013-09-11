@@ -1,4 +1,3 @@
-//Test Comment
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -6,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class Arena extends JPanel implements KeyListener{
 	private Model _model;
-	private Snake snake;
+	private Snake player1;
 	
 	public Arena() 
 	{
@@ -17,7 +16,7 @@ public class Arena extends JPanel implements KeyListener{
 		_model = new Model();
 		addCellsToPanel();
 		
-		snake = new Snake(_model);
+		player1 = new Snake(_model);
 		_model.plantSeed();
 		
 	}
@@ -45,7 +44,7 @@ public class Arena extends JPanel implements KeyListener{
 				c.kill();
 			}
 		}
-		snake = new Snake(_model);
+		player1 = new Snake(_model);
 		_model.plantSeed();
 	}
 	
@@ -65,9 +64,9 @@ public class Arena extends JPanel implements KeyListener{
 			} catch (Exception e){e.printStackTrace();}
 			
 			try{
-				snake.slither();
+				player1.slither();
 			} catch (SnakeCrashException e) { 
-				System.out.println("Game Over\nScore: " + snake.getLength());
+				System.out.println("Game Over\nScore: " + player1.getLength());
 				return;
 		    }
 		}	
@@ -75,16 +74,16 @@ public class Arena extends JPanel implements KeyListener{
 	
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			snake.requestChangeHeading(Snake.DIR.RIGHT);
+			player1.requestChangeHeading(Snake.DIR.RIGHT);
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			snake.requestChangeHeading(Snake.DIR.LEFT);
+			player1.requestChangeHeading(Snake.DIR.LEFT);
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			snake.requestChangeHeading(Snake.DIR.DOWN);
+			player1.requestChangeHeading(Snake.DIR.DOWN);
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			snake.requestChangeHeading(Snake.DIR.UP);
+			player1.requestChangeHeading(Snake.DIR.UP);
 		}
 	}
 	@Override
