@@ -3,53 +3,54 @@ import java.awt.*;
 
 public class Cell extends JPanel{
 
-	private boolean alive;
-	private boolean seed;
+	private boolean _alive;
+	private boolean _seed;
 	private int _size;
+	private Color _color;
 	
 	public Cell(int size)
 	{
 		_size = size;
 		setSize(size, size);
-		alive = false;
-		seed = false;
+		_alive = false;
+		_seed = false;
 	}
 	public void seed()
 	{
-		seed = true;
-		alive = false;
+		_seed = true;
+		_alive = false;
 		repaint();
 	}
-	public void spawn()
+	public void spawn(Color color)
 	{
-		seed = false;
-		alive = true;
+		_seed = false;
+		_alive = true;
 		repaint();
 	}
 	public void kill()
 	{
-		alive = false;
-		seed = false;
+		_alive = false;
+		_seed = false;
 		repaint();
 	}
 	public boolean isAlive()
 	{
-		return alive;
+		return _alive;
 	}
 	public boolean isSeed()
 	{
-		return seed;
+		return _seed;
 	}
 	public void paintComponent(Graphics g)
 	{
-		if(alive)
+		if(_alive)
 		{
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, _size , _size);
 			g.setColor(Color.BLACK);
 			g.drawRect(0, 0, _size, _size);
 		}
-		else if(seed)
+		else if(_seed)
 		{
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, _size, _size);
@@ -57,7 +58,7 @@ public class Cell extends JPanel{
 		else
 		{
 			g.setColor(Color.BLACK);
-			g.fillRect(0, 0, _size, _size);
+			g.fillRect(0, 0, _size-1, _size-1);
 		}
 		
 		

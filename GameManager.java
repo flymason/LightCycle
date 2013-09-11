@@ -37,7 +37,7 @@ public class GameManager extends JFrame implements MouseListener {
 		
 		_arena = new Arena();
 		
-		addSmileyBar();
+		//addSmileyBar();
 		add(_arena, BorderLayout.CENTER);
 		pack();	
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

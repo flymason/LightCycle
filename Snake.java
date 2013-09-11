@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Point;
 import java.util.LinkedList;
 
@@ -54,7 +55,7 @@ public class Snake {
 		
 		_body.addFirst(c);   
 		_headLocation = new Point(x, y);
-		c.spawn();
+		c.spawn(Color.WHITE);
 	}
 	
 	public void requestChangeHeading(DIR newHeading)
