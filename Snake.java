@@ -12,13 +12,16 @@ public class Snake {
 	private Point _headLocation;
 	private int food;
 	private int length;
+	private Color _color;
 	
-	public Snake(Model model)
+	public Snake(Model model, Color color, DIR heading, int startingX)
 	{
 		
 		_model = model;
-		_heading = GameManager.STARTING_HEADING;
-		_headLocation = new Point(GameManager.ARENA_WIDTH/2, GameManager.ARENA_HEIGHT-1);
+		_color = color;
+		_heading = heading;
+		int xLocation;
+		_headLocation = new Point(startingX, GameManager.ARENA_HEIGHT/2);
 		
 		length = 0;
 		food = 0;
@@ -55,7 +58,7 @@ public class Snake {
 		
 		_body.addFirst(c);   
 		_headLocation = new Point(x, y);
-		c.spawn(Color.WHITE);
+		c.spawn(_color);
 	}
 	
 	public void requestChangeHeading(DIR newHeading)

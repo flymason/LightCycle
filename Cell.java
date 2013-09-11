@@ -1,4 +1,3 @@
-//Ben made a change!
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,6 +23,7 @@ public class Cell extends JPanel{
 	}
 	public void spawn(Color color)
 	{
+		_color = color;
 		_seed = false;
 		_alive = true;
 		repaint();
@@ -46,15 +46,15 @@ public class Cell extends JPanel{
 	{
 		if(_alive)
 		{
-			g.setColor(Color.WHITE);
-			g.fillRect(0, 0, _size , _size);
+			g.setColor(_color);
+			g.fillRect(0, 0, _size-1 , _size-1);
 			g.setColor(Color.BLACK);
-			g.drawRect(0, 0, _size, _size);
+			g.drawRect(0, 0, _size , _size);
 		}
 		else if(_seed)
 		{
 			g.setColor(Color.GREEN);
-			g.fillRect(0, 0, _size, _size);
+			g.fillRect(0, 0, _size-1, _size-1);
 		}
 		else
 		{
