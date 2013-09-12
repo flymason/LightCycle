@@ -14,7 +14,7 @@ public class GameManager extends JFrame {
 	public static final int ARENA_WIDTH = 60;
 	public static final int FOOD_VALUE = 20;
 	
-	public static final Color BACKGROUND_COLOR = Color.GRAY;	// color of grid lines
+	public static final Color BACKGROUND_COLOR = Color.decode("#121212");	// color of grid lines
 	public static final Color INACTIVE_CELL_COLOR = Color.BLACK;
 	public static final Color PLAYER1_COLOR = Color.RED;
 	public static final Color PLAYER2_COLOR = Color.MAGENTA;
