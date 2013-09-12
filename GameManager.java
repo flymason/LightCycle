@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 public class GameManager extends JFrame implements MouseListener {
 
 	public static final int INITIAL_DELAY = 200;
-	public static final int SLITHER_DELAY = 70;
-	public static final int CELL_SIZE = 15;
-	public static final int ARENA_HEIGHT = 35;
-	public static final int ARENA_WIDTH = 33;
+	public static final int SLITHER_DELAY = 90;
+	public static final int CELL_SIZE = 10;
+	public static final int ARENA_HEIGHT = 60;
+	public static final int ARENA_WIDTH = 60;
 	public static final int FOOD_VALUE = 5;
 	public static final Snake.DIR STARTING_HEADING = Snake.DIR.UP;
 	public static final Color BACKGROUND_COLOR = Color.GRAY;

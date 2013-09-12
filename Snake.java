@@ -70,14 +70,14 @@ public class Snake {
 	public void slither() throws SnakeCrashException
 	{
 		moveHead();
-		if(food < 1)
+		/*if(food < 1)
 		{
 			moveTail();
 		}
 		else
 		{
-			food--;
-		}
+			//food--;
+		}*/
 	}
 	
 	private void moveHead() throws SnakeCrashException
