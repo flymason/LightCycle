@@ -17,14 +17,15 @@ public class Arena extends JPanel implements KeyListener{
 		_model = new Model();
 		
 		setBackground(GameManager.BACKGROUND_COLOR);
-		addCellsToPanel();
+		addCellsToArenaPanel();
 		
 		player1 = new Snake(_model, GameManager.PLAYER1_COLOR, Snake.DIR.LEFT, GameManager.ARENA_WIDTH-5);
 		player2= new Snake(_model, GameManager.PLAYER2_COLOR, Snake.DIR.RIGHT, 5);
-		_model.plantSeed();
+		
+		_model.placeRandomFood();
 		
 	}
-	public void addCellsToPanel()
+	public void addCellsToArenaPanel()
 	{
 		Cell c;
 		for(int x = 0; x < GameManager.ARENA_WIDTH; x++)

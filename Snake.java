@@ -49,11 +49,11 @@ public class Snake {
 		if (c.isAlive())
 			{ throw new SnakeCrashException(); }
 		
-		if(c.isSeed())
+		if(c.isFood())
 		{
 			food += GameManager.FOOD_VALUE;
 			length += food;
-			_model.plantSeed();
+			_model.placeRandomFood();
 		}
 		
 		_body.addFirst(c);   
@@ -70,14 +70,14 @@ public class Snake {
 	public void slither() throws SnakeCrashException
 	{
 		moveHead();
-		/*if(food < 1)
+		if(food < 1)
 		{
 			moveTail();
 		}
 		else
 		{
-			//food--;
-		}*/
+			food--;
+		}
 	}
 	
 	private void moveHead() throws SnakeCrashException

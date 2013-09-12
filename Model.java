@@ -22,7 +22,7 @@ public class Model {
 		return _matrix[x][y];
 	}
 	
-	public void plantSeed()
+	public void placeRandomFood()
 	{
 		Random rand = new Random();
 		
@@ -37,7 +37,7 @@ public class Model {
 			
 			if(!c.isAlive())
 			{
-				c.seed();
+				c.makeFood();
 				return;
 			}
 		}
