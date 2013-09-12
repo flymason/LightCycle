@@ -23,8 +23,8 @@ public class GameManager extends JFrame implements MouseListener {
 	public static final int FOOD_VALUE = 5;
 	public static final Snake.DIR STARTING_HEADING = Snake.DIR.UP;
 	public static final Color BACKGROUND_COLOR = Color.GRAY;
-	public static final Color PLAYER1_COLOR = Color.MAGENTA;
-	public static final Color PLAYER2_COLOR = Color.RED;
+	public static final Color PLAYER1_COLOR = Color.RED;
+	public static final Color PLAYER2_COLOR = Color.MAGENTA;
 	
 	
 	
