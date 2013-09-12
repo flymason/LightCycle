@@ -90,6 +90,18 @@ public class Arena extends JPanel implements KeyListener{
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			player1.requestChangeHeading(Snake.DIR.UP);
 		}
+		else if (e.getKeyCode() == KeyEvent.VK_D) {
+			player2.requestChangeHeading(Snake.DIR.RIGHT);
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_A) {
+			player2.requestChangeHeading(Snake.DIR.LEFT);
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_S) {
+			player2.requestChangeHeading(Snake.DIR.DOWN);
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_W) {
+			player2.requestChangeHeading(Snake.DIR.UP);
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent arg0) {
