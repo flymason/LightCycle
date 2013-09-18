@@ -63,8 +63,7 @@ public class Snake {
 	
 	public void requestChangeHeading(DIR newHeading)
 	{
-		if(_newHeadings.size() < 3)
-			_newHeadings.addLast(newHeading);
+		_newHeadings.addLast(newHeading);
 	}
 	
 	public void slither() throws SnakeCrashException
@@ -125,6 +124,8 @@ public class Snake {
 	
 	private boolean headingIsValid(DIR newHeading)
 	{
+		if(newHeading.equals(_heading))
+			return false;
 		if(newHeading == DIR.RIGHT && _heading == DIR.LEFT)
 			return false;
 		if(newHeading == DIR.LEFT && _heading == DIR.RIGHT)
