@@ -40,7 +40,7 @@ public class Arena extends JPanel implements KeyListener{
 	}
 	public void restartGame()
 	{
-		/*Cell c;
+		Cell c;
 		for(int x = 0; x < GameManager.ARENA_WIDTH; x++)
 		{
 			for(int y = 0; y < GameManager.ARENA_HEIGHT; y++)
@@ -49,8 +49,10 @@ public class Arena extends JPanel implements KeyListener{
 				c.kill();
 			}
 		}
-		//player1 = new Snake(_model);
-		_model.plantSeed();*/
+		player1 = new Snake(_model, GameManager.PLAYER1_COLOR, Snake.DIR.LEFT, GameManager.ARENA_WIDTH-5);
+		player2= new Snake(_model, GameManager.PLAYER2_COLOR, Snake.DIR.RIGHT, 5);
+		_model.placeRandomFood();
+		
 	}
 	
 	public void startSlither()
@@ -102,6 +104,10 @@ public class Arena extends JPanel implements KeyListener{
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_W) {
 			player2.requestChangeHeading(Snake.DIR.UP);
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			restartGame();
+			startSlither();
 		}
 	}
 	@Override
