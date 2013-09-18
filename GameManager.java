@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class GameManager extends JFrame {
 
 	public static final int INITIAL_DELAY = 200;
-	public static final int SLITHER_DELAY = 90;
+	public static final int UPDATE_RATE = 10;
 	public static final int CELL_SIZE = 10;
 	public static final int ARENA_HEIGHT = 60;
 	public static final int ARENA_WIDTH = 60;
@@ -19,6 +19,8 @@ public class GameManager extends JFrame {
 	public static final Color PLAYER1_COLOR = Color.RED;
 	public static final Color PLAYER2_COLOR = Color.MAGENTA;
 	public static final Color FOOD_COLOR = Color.GREEN;
+	public static final String PLAYER1 = "Red";
+	public static final String PLAYER2 = "Purple";
 	
 	
 	
@@ -38,7 +40,6 @@ public class GameManager extends JFrame {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((screenSize.width - getWidth()) / 2, (screenSize.height - getHeight()) / 2 );
 		setVisible(true);
-		_arena.startSlither();
 	}	
 
 

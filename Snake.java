@@ -20,7 +20,6 @@ public class Snake {
 		_model = model;
 		_color = color;
 		_heading = heading;
-		int xLocation;
 		_headLocation = new Point(startingX, GameManager.ARENA_HEIGHT/2);
 		
 		length = 0;
@@ -44,10 +43,10 @@ public class Snake {
 		
 		try {
 			c = _model.getCell(x,  y);
-		} catch (ArrayIndexOutOfBoundsException e) { throw new SnakeCrashException(); }
+		} catch (ArrayIndexOutOfBoundsException e) { throw new SnakeCrashException(this); }
 		
 		if (c.isAlive())
-			{ throw new SnakeCrashException(); }
+			{ throw new SnakeCrashException(this); }
 		
 		if(c.isFood())
 		{
