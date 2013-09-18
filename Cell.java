@@ -56,6 +56,8 @@ public class Cell extends JPanel{
 		}
 		else
 		{
+			g.setColor(GameManager.BACKGROUND_COLOR);
+			g.fillRect(0, 0, _size, _size);
 			g.setColor(GameManager.INACTIVE_CELL_COLOR);
 			g.fillRect(0, 0, _size-1, _size-1);
 		}

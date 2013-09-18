@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class Arena extends JPanel implements KeyListener{
 	private Model _model;
 	private Snake player1;
 	private Snake player2;
+	private boolean isRunning;
 	
 	public Arena() 
 	{
@@ -20,9 +20,17 @@ public class Arena extends JPanel implements KeyListener{
 		addCellsToArenaPanel();
 		
 		player1 = new Snake(_model, GameManager.PLAYER1_COLOR, Snake.DIR.LEFT, GameManager.ARENA_WIDTH-5);
-		player2= new Snake(_model, GameManager.PLAYER2_COLOR, Snake.DIR.RIGHT, 5);
-		
+		player2= new Snake(_model, GameManager.PLAYER2_COLOR, Snake.DIR.RIGHT, 5);		
 		_model.placeRandomFood();
+		
+		Thread gameThread = new Thread() {
+			public void run()
+			{
+				startSlither();
+			}
+		};
+		isRunning = true;
+		gameThread.start();
 		
 	}
 	public void addCellsToArenaPanel()
@@ -53,6 +61,19 @@ public class Arena extends JPanel implements KeyListener{
 		player2= new Snake(_model, GameManager.PLAYER2_COLOR, Snake.DIR.RIGHT, 5);
 		_model.placeRandomFood();
 		
+		try {
+            Thread.sleep(200);
+         } catch (InterruptedException ex) {}
+		
+		Thread gameThread = new Thread() {
+			public void run()
+			{
+				startSlither();
+			}
+		};
+		isRunning = true;
+		gameThread.start();
+		
 	}
 	
 	public void startSlither()
@@ -64,19 +85,33 @@ public class Arena extends JPanel implements KeyListener{
 		
 		addKeyListener(this);
 		
-		while(true)
-		{
-			try{
-				Thread.sleep(GameManager.SLITHER_DELAY);
-			} catch (Exception e){e.printStackTrace();}
-			
+		while(isRunning)
+		{			
 			try{
 				player1.slither();
 				player2.slither();
-			} catch (SnakeCrashException e) { 
+			} catch (SnakeCrashException exception) { 
 				System.out.println("Game Over\nScore: " + player1.getLength());
-				return;
-		    }
+				String winnerMessage = "";
+				if(exception.getSnake() == player2)
+					winnerMessage = GameManager.PLAYER1 + " Wins!";
+				if(exception.getSnake() == player1)
+					winnerMessage = GameManager.PLAYER2 + " Wins!";
+				
+				isRunning = false;
+				Graphics g = this.getGraphics();
+				Font medium = new Font("Helvetica", Font.BOLD, 24);
+				FontMetrics metr_m = this.getFontMetrics(medium);
+				g.setColor(Color.WHITE);
+				g.setFont(medium);
+				g.drawString(winnerMessage, (this.getWidth() - metr_m.stringWidth(winnerMessage)) / 2, this.getHeight() / 2);
+				setBackground(GameManager.BACKGROUND_COLOR);
+				
+				
+		    }			
+			try {
+                Thread.sleep(1000 / GameManager.UPDATE_RATE);
+             } catch (InterruptedException ex) {}
 		}	
 	}
 	
@@ -106,8 +141,8 @@ public class Arena extends JPanel implements KeyListener{
 			player2.requestChangeHeading(Snake.DIR.UP);
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			isRunning = false;
 			restartGame();
-			startSlither();
 		}
 	}
 	@Override
