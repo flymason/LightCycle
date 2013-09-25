@@ -3,53 +3,58 @@ import java.awt.*;
 
 public class Cell extends JPanel{
 
-	private boolean _alive;
-	private boolean _food;
+	public enum Status {BODY, HEAD, BLANK, FOOD};
+	private Status status;
 	private int _size;
-	private Color _spawnColor;
+	private Color _aliveColor;
 	
 	public Cell(int size)
 	{
 		_size = size;
 		setSize(size, size);
-		_alive = false;
-		_food = false;
+		status = Status.BLANK;
 	}
 	public void makeFood()
 	{
-		_food = true;
-		_alive = false;
+		status = Status.FOOD;
 		repaint();
 	}
-	public void spawn(Color color)
+	public void setColor(Color color)
 	{
-		_spawnColor = color;
-		_food = false;
-		_alive = true;
-		repaint();
+		_aliveColor = color;
 	}
-	public void kill()
+	
+	public Status getStatus()
 	{
-		_alive = false;
-		_food = false;
+		return status;
+	}
+	public void setStatus(Status s)
+	{
+		status = s;
 		repaint();
 	}
+	
 	public boolean isAlive()
 	{
-		return _alive;
+		if(status == Status.HEAD || status == Status.BODY)
+			return true;
+		else
+			return false;
 	}
-	public boolean isFood()
-	{
-		return _food;
-	}
+	
 	public void paintComponent(Graphics g)
 	{
-		if(_alive)
+		if(status == Status.HEAD)
 		{
-			g.setColor(_spawnColor);
+			g.setColor(Color.YELLOW);
 			g.fillRect(0, 0, _size-1 , _size-1);
 		}
-		else if(_food)
+		else if(status == Status.BODY)
+		{
+			g.setColor(_aliveColor);
+			g.fillRect(0, 0, _size-1 , _size-1);
+		}
+		else if(status == Status.FOOD)
 		{
 			g.setColor(GameManager.FOOD_COLOR);
 			g.fillRect(0, 0, _size-1, _size-1);

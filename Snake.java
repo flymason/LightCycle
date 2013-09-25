@@ -29,10 +29,10 @@ public class Snake {
 		
 		try {
 			spawnCell((int)_headLocation.getX(), (int) _headLocation.getY());
-		} catch (SnakeCrashException e) {}		
+		} catch (Exception e) {}		
 	}
 	
-	private void spawnCell(int x, int y) throws SnakeCrashException
+	private void spawnCell(int x, int y) throws SnakeCrashException, TieException
 	{
 		x = x < 0 ? GameManager.ARENA_WIDTH - 1 : x;
 		y = y < 0 ? GameManager.ARENA_HEIGHT - 1 : y;
@@ -45,19 +45,27 @@ public class Snake {
 			c = _model.getCell(x,  y);
 		} catch (ArrayIndexOutOfBoundsException e) { throw new SnakeCrashException(this); }
 		
-		if (c.isAlive())
+		if (c.getStatus() == Cell.Status.BODY)
 			{ throw new SnakeCrashException(this); }
 		
-		if(c.isFood())
+		if (c.getStatus() == Cell.Status.HEAD)
+		{ throw new TieException(this); }
+		
+		if(c.getStatus() == Cell.Status.FOOD)
 		{
 			food += GameManager.FOOD_VALUE;
 			length += food;
 			_model.placeRandomFood();
 		}
 		
+		if(!_body.isEmpty())
+			_body.getFirst().setStatus(Cell.Status.BODY);	//change head to body
+		
+		
 		_body.addFirst(c);   
 		_headLocation = new Point(x, y);
-		c.spawn(_color);
+		c.setColor(_color);
+		c.setStatus(Cell.Status.HEAD);					//set up new head cell
 	}
 	
 	public void requestChangeHeading(DIR newHeading)
@@ -65,7 +73,7 @@ public class Snake {
 		_newHeadings.addLast(newHeading);
 	}
 	
-	public void slither() throws SnakeCrashException
+	public void slither() throws SnakeCrashException, TieException
 	{
 		moveHead();
 		if(food < 1)
@@ -78,7 +86,7 @@ public class Snake {
 		}
 	}
 	
-	private void moveHead() throws SnakeCrashException
+	private void moveHead() throws SnakeCrashException, TieException
 	{
 		
 		updateHeading();
@@ -140,7 +148,7 @@ public class Snake {
 	private void moveTail()
 	{
 			Cell tail = _body.getLast();
-			tail.kill();
+			tail.setStatus(Cell.Status.BLANK);
 			_body.remove(tail);
 	}
 	

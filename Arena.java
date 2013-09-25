@@ -54,7 +54,7 @@ public class Arena extends JPanel implements KeyListener{
 			for(int y = 0; y < GameManager.ARENA_HEIGHT; y++)
 			{
 				c = _model.getCell(x, y);
-				c.kill();
+				c.setStatus(Cell.Status.BLANK);
 			}
 		}
 		player1 = new Snake(_model, GameManager.PLAYER1_COLOR, Snake.DIR.LEFT, GameManager.ARENA_WIDTH-5);
